@@ -1,0 +1,61 @@
+import React, { Component } from 'react';
+import Order from '../../components/Order/Order'
+import axios from '../../axios-order'
+import withErrorHandler from '../../hoc/error/errorHandler';
+import Spinner from '../../components/UI/Spinner/Spinner';
+
+class Orders extends Component {
+    state ={
+        loading: false,
+        orders: []
+    }
+    componentDidMount() {
+        this.setState({loading: true})
+       
+        axios.get('/orders.json')
+        .then( (res)=>{
+            const fetchedOrders = [];
+            // console.log(res.data);
+            for(let key in res.data) {
+                fetchedOrders.push( {
+                    ...res.data[key],
+                    id: key
+                });
+            }
+          
+            this.setState({loading: true, orders: fetchedOrders});
+            console.log(typeof(this.state.orders))
+            console.log(this.state.orders)
+        } )
+        .catch(err=>{
+            console.log(err)
+            this.setState({loading: true})
+        })
+    }
+    
+    render() {
+        let orderDiv;
+        orderDiv = (<Spinner />)
+       
+        
+    if(this.state.orders){
+        orderDiv= this.state.orders.map((order)=>{
+                return <Order ingredients={order.ingredients}
+                price={order.price} 
+                key={order.id} /> })
+    }
+    // console.log(orderDiv)
+        return (
+            <div>
+             {/* {this.state.orders.map((order)=>{
+                return <Order ingredients={order.ingredients}
+                price={order.price} 
+                key={order.id} /> })} */}
+                {orderDiv}
+            </div>
+            
+        )
+    }
+}
+
+export default withErrorHandler(Orders, axios);
