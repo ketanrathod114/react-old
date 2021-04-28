@@ -1,0 +1,27 @@
+{
+  "ingredients" : {
+    "bacon" : 0,
+    "cheese" : 0,
+    "meat" : 0,
+    "salad" : 0
+  },
+  "orders" : {
+    "-MZ4DV5fiOVjPxJUVk6W" : {
+      "ingredients" : {
+        "bacon" : 1,
+        "cheese" : 0,
+        "meat" : 1,
+        "salad" : 2
+      },
+      "orderData" : {
+        "country" : "India",
+        "deliveryMethod" : "fastest",
+        "email" : "ketanhrathod@gmail.com",
+        "name" : "Ketankumar Rathod",
+        "street" : "Pune",
+        "zipcode" : "411014"
+      },
+      "price" : 6.5
+    }
+  }
+}
